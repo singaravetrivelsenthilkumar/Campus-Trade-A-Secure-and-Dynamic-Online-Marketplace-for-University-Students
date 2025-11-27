@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Campus Trade - Campus. Click. Connect.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    .hero-title {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff, #ccc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-button {
+      background: linear-gradient(135deg, #d4af37, #f4e4bc);
+      color: #000;
+      transition: all 0.3s ease;
+    }
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+    }
+    .category-chip:hover {
+      transform: scale(1.05);
+    }
+    #navbar {
+      transform: translateY(0);
+      transition: transform 0.5s ease-in-out;
+    }
+    /* Horizontal scroll snapping for items */
+    #featured-items {
+      scroll-snap-type: x mandatory;
+    }
+    .item-card {
+      scroll-snap-align: start;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- 🧭 Sticky Top Navigation -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/60 shadow-md transition-all duration-500">
+  <div class="flex justify-between items-center px-6 py-4">
+    <div class="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-200 text-transparent bg-clip-text">
+      Campus Trade
+    </div>
+    <div class="flex gap-4">
+      <a href="login.html" class="px-4 py-2 rounded-md border border-white hover:bg-white hover:text-black transition">
+        Log In / Sign Up
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="h-20"></div>
+
+  <!-- 🎯 Hero Section -->
+  <div class="text-center py-16 px-6">
+    <h1 class="hero-title text-5xl md:text-6xl font-bold mb-6">
+      🧠 Campus. Click. Connect.
+    </h1>
+    <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+      Discover, swap, and connect with fellow students. Your campus marketplace for everything you need.
+    </p>
+    <button id="startSwappingBtn" class="cta-button font-semibold px-8 py-4 rounded-full shadow-lg">
+      Start Swapping
+    </button>
+
+    <div id="searchContainer" class="search-container" style="display: none; align-items: center; gap: 8px; margin-top: 15px;">
+      <input type="text" id="searchBar" placeholder="Search items..." 
+            style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; flex: 1;
+                    background-color: black; color: white;">
+      <button id="searchBtn" style="padding: 8px 12px; background-color: #ff6b00; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        🔍
+      </button>
+    </div>
+  </div>
+
+  <!-- 📂 Categories -->
+  <div class="px-6 mb-8">
+    <h2 class="text-2xl font-semibold text-white mb-4">Browse Categories</h2>
+    <div class="flex gap-4 overflow-x-auto pb-2">
+      <div class="category-chip flex-shrink-0 bg-white text-black px-6 py-3 rounded-full cursor-pointer" data-category="all">All Items</div>
+      <div class="category-chip flex-shrink-0 bg-white text-black px-6 py-3 rounded-full cursor-pointer" data-category="books">Books</div>
+      <div class="category-chip flex-shrink-0 bg-white text-black px-6 py-3 rounded-full cursor-pointer" data-category="gadgets">Gadgets</div>
+      <div class="category-chip flex-shrink-0 bg-white text-black px-6 py-3 rounded-full cursor-pointer" data-category="essentials">Essentials</div>
+      <div class="category-chip flex-shrink-0 bg-white text-black px-6 py-3 rounded-full cursor-pointer" data-category="sports">Sports</div>
+    </div>
+  </div>
+
+  <!-- 🛒 Featured Items -->
+<div class="px-6 mb-12">
+  <h2 class="text-2xl font-semibold text-white mb-6">Featured Items</h2>
+  <div id="featured-items" class="flex gap-6 overflow-x-auto pb-4">
+    <div class="item-card w-72 bg-white text-black rounded-2xl shadow-lg p-6" data-category="books" data-name="Books">
+      <div class="w-full h-48 bg-gray-200 rounded-xl mb-4 flex items-center justify-center"><span class="text-6xl">📚</span></div>
+      <h3 class="font-semibold">Calculus Textbook</h3>
+      <p class="text-sm mb-4">Latest edition, like new. Great for exams.</p>
+      <div class="flex gap-2"><button class="flex-1 bg-black text-white py-2 rounded-lg" onclick="openModal(1)">View</button><button class="flex-1 border border-black text-black py-2 rounded-lg">Message</button></div>
+    </div>
+    <div class="item-card w-72 bg-white text-black rounded-2xl shadow-lg p-6" data-category="gadgets" data-name="Bluetooth Headphones">
+      <div class="w-full h-48 bg-gray-200 rounded-xl mb-4 flex items-center justify-center"><span class="text-6xl">🎧</span></div>
+      <h3 class="font-semibold">Bluetooth Headphones</h3>
+      <p class="text-sm mb-4">Noise-cancelling, battery 30hr. Barely used.</p>
+      <div class="flex gap-2"><button class="flex-1 bg-black text-white py-2 rounded-lg" onclick="openModal(2)">View</button><button class="flex-1 border border-black text-black py-2 rounded-lg">Message</button></div>
+    </div>
+    <div class="item-card w-72 bg-white text-black rounded-2xl shadow-lg p-6" data-category="essentials" data-name="Iron box">
+      <div class="w-full h-48 bg-gray-200 rounded-xl mb-4 flex items-center justify-center"><span class="text-6xl">🖨</span></div>
+      <h3 class="font-semibold">Iron Box</h3>
+      <p class="text-sm mb-4">Lightweight and quick heating. Almost new.</p>
+      <div class="flex gap-2"><button class="flex-1 bg-black text-white py-2 rounded-lg" onclick="openModal(3)">View</button><button class="flex-1 border border-black text-black py-2 rounded-lg">Message</button></div>
+    </div>
+    <div class="item-card w-72 bg-white text-black rounded-2xl shadow-lg p-6" data-category="gadgets" data-name="Laptop">
+      <div class="w-full h-48 bg-gray-200 rounded-xl mb-4 flex items-center justify-center"><span class="text-6xl">💻</span></div>
+      <h3 class="font-semibold">HP Laptop</h3>
+      <p class="text-sm mb-4">i5, 8GB RAM, 512GB SSD. Perfect condition.</p>
+      <div class="flex gap-2"><button class="flex-1 bg-black text-white py-2 rounded-lg" onclick="openModal(4)">View</button><button class="flex-1 border border-black text-black py-2 rounded-lg">Message</button></div>
+    </div>
+    <div class="item-card w-72 bg-white text-black rounded-2xl shadow-lg p-6" data-category="gadgets" data-name="Powerbank">
+      <div class="w-full h-48 bg-gray-200 rounded-xl mb-4 flex items-center justify-center"><span class="text-6xl">🔋</span></div>
+      <h3 class="font-semibold">MI Power Bank</h3>
+      <p class="text-sm mb-4">20000mAh, fast charging.</p>
+      <div class="flex gap-2"><button class="flex-1 bg-black text-white py-2 rounded-lg" onclick="openModal(5)">View</button><button class="flex-1 border border-black text-black py-2 rounded-lg">Message</button></div>
+    </div>
+    <div class="item-card w-72 bg-white text-black rounded-2xl shadow-lg p-6" data-category="essentials"data-name="Calculator">
+      <div class="w-full h-48 bg-gray-200 rounded-xl mb-4 flex items-center justify-center"><span class="text-6xl">🧮</span></div>
+      <h3 class="font-semibold">Calculator</h3>
+      <p class="text-sm mb-4">Casio scientific calculator. Perfect for exams.</p>
+      <div class="flex gap-2"><button class="flex-1 bg-black text-white py-2 rounded-lg" onclick="openModal(6)">View</button><button class="flex-1 border border-black text-black py-2 rounded-lg">Message</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Buttons -->
+<div class="fixed bottom-24 right-6 z-40 group transition-all duration-300 hover:scale-110">
+  <button id="postBtn" class="relative flex items-center gap-2">
+    <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs rounded px-2 py-1">POST</span>
+    <div class="flex items-center justify-center w-16 h-16 rounded-full shadow-lg bg-gradient-to-r from-yellow-400 to-yellow-200 text-black">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+    </div>
+  </button>
+</div>
+
+<div class="fixed bottom-6 right-6 z-40 group transition-all duration-300 hover:scale-110">
+  <button class="relative flex items-center gap-2">
+    <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs rounded px-2 py-1">CHAT</span>
+    <div class="flex items-center justify-center w-14 h-14 rounded-full shadow-lg bg-gradient-to-r from-yellow-400 to-yellow-200 text-black border border-white">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+    </div>
+  </button>
+</div>
+
+<div class="h-20"></div>
+
+<!-- 📌 Item Details Modal -->
+<div id="itemModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50 overflow-y-auto">
+  <div class="bg-white text-gray-900 rounded-2xl shadow-2xl w-full max-w-2xl p-8 relative animate-fadeIn border border-gray-200 my-10 max-h-[90vh] overflow-y-auto">
+
+    <!-- Close Button -->
+    <button onclick="closeModal()" class="absolute top-5 right-5 text-3xl font-bold text-gray-500 hover:text-red-500 transition">&times;</button>
+
+    <!-- Carousel -->
+    <div id="modalCarousel" class="relative w-full h-72 mb-6 overflow-hidden rounded-xl shadow-md">
+      <div id="carouselImages" class="flex transition-transform duration-500"></div>
+      <button id="prevImage" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black/50 hover:bg-black p-3 rounded-full text-white shadow-md transition">&#10094;</button>
+      <button id="nextImage" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black/50 hover:bg-black p-3 rounded-full text-white shadow-md transition">&#10095;</button>
+    </div>
+
+    <!-- Item Details -->
+    <h2 id="modalItemName" class="text-3xl font-extrabold mb-3 text-gray-800 tracking-wide border-b pb-2 border-gray-200">Item Name</h2>
+    
+    <div class="grid grid-cols-2 gap-4 text-lg">
+      <p><span class="font-semibold text-gray-700">⚙ Specs:</span> <span id="modalItemSpecs" class="text-gray-600"></span></p>
+      <p><span class="font-semibold text-gray-700">📦 Condition:</span> <span id="modalItemCondition" class="text-gray-600"></span></p>
+      <p><span class="font-semibold text-gray-700">🔖 Model & Year:</span> <span id="modalItemModel" class="text-gray-600"></span></p>
+      <p class="col-span-2"><span class="font-semibold text-gray-700">📝 Description:</span> <span id="modalItemDescription" class="text-gray-600"></span></p>
+    </div>
+
+    <!-- Seller Info -->
+    <div class="mt-6 p-5 bg-gradient-to-r from-yellow-50 to-yellow-100 border border-yellow-300 rounded-xl shadow-inner">
+      <h3 class="font-bold text-xl text-yellow-800 mb-3">👤 Seller Information</h3>
+      <div class="grid grid-cols-2 gap-4">
+        <p><span class="font-semibold text-gray-800">Name:</span> <span id="modalItemSeller" class="text-gray-700"></span></p>
+        <p><span class="font-semibold text-gray-800">Contact:</span> <span id="modalItemContact" class="text-gray-700"></span></p>
+        <p class="col-span-2"><span class="font-semibold text-gray-800">📍 Location:</span> <span id="modalItemLocation" class="text-gray-700"></span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden Post Item Form -->
+<div id="postForm" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
+  <div class="bg-white p-6 rounded-2xl shadow-2xl w-[420px] relative animate-fadeIn border border-gray-200">
+    
+    <!-- Close Button (X) -->
+    <button id="closePostForm" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-xl font-bold">&times;</button>
+    
+    <!-- Header -->
+    <h2 class="text-2xl font-bold mb-4 text-center text-gray-800">✨ Post an Item ✨</h2>
+    
+    <!-- Form -->
+    <form class="space-y-3">
+      <input id="itemName" type="text" placeholder="Item Name" 
+             class="w-full p-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none text-gray-900 placeholder-gray-500">
+      
+      <input id="itemSpecs" type="text" placeholder="Specifications" 
+             class="w-full p-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none text-gray-900 placeholder-gray-500">
+      
+      <input id="itemCondition" type="text" placeholder="Condition (New/Used)" 
+             class="w-full p-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none text-gray-900 placeholder-gray-500">
+      
+      <input id="itemModel" type="text" placeholder="Model" 
+             class="w-full p-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none text-gray-900 placeholder-gray-500">
+      
+      <input id="itemYear" type="number" placeholder="Year" 
+             class="w-full p-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none text-gray-900 placeholder-gray-500">
+      
+      <input id="itemDescription" type="text" placeholder="Description" 
+             class="w-full p-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none text-gray-900 placeholder-gray-500">
+      
+      <input id="itemSeller" type="text" placeholder="Seller Name" 
+             class="w-full p-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none text-gray-900 placeholder-gray-500">
+      
+      <input id="itemContact" type="text" placeholder="Contact Info" 
+             class="w-full p-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none text-gray-900 placeholder-gray-500">
+
+      <input id="itemLocation" type="text" placeholder="Location" 
+             class="w-full p-3 border border-gray-300 bg-white rounded-lg focus:ring-2 focus:ring-yellow-400 outline-none text-gray-900 placeholder-gray-500">
+      
+      
+      <!-- File Upload (Image Upload) -->
+      <div class="w-full p-4 border-2 border-dashed border-gray-300 rounded-lg text-center cursor-pointer hover:border-yellow-400 transition bg-gray-50">
+        <input id="itemImage" type="file" accept="image/*" class="hidden">
+        <label for="itemImage" class="block text-gray-600 cursor-pointer font-medium">📷 Upload Item Image</label>
+        <p id="fileName" class="text-sm text-gray-500 mt-1"></p>
+      </div>
+      
+      <!-- Buttons -->
+      <div class="flex justify-between pt-2">
+        <button type="button" id="submitPost" 
+                class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-5 py-2 rounded-lg shadow-md transition">
+          🚀 Post
+        </button>
+        <button type="button" id="closePostForm2" 
+                class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-lg shadow-md transition">
+          ❌ Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Small animation -->
+<style>
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.95);}
+  to {opacity: 1; transform: scale(1);}
+}
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+</style>
+
+<script>
+  // Hide/Show Navbar
+  let scrollTimeout;
+  const navbar = document.getElementById("navbar");
+  function hideNavbar() { if (window.scrollY > 0) { navbar.style.transform = "translateY(-100%)"; } }
+  function showNavbar() { navbar.style.transform = "translateY(0)"; }
+  window.addEventListener("scroll", () => {
+    clearTimeout(scrollTimeout);
+    if (window.scrollY <= 0) {
+      showNavbar();
+    } else {
+      showNavbar();
+      scrollTimeout = setTimeout(() => { hideNavbar(); }, 1500);
+    }
+  });
+
+  // Category Filtering + Scroll
+  const categoryButtons = document.querySelectorAll(".category-chip");
+  const itemCards = document.querySelectorAll(".item-card");
+  const featuredItems = document.getElementById("featured-items");
+
+  categoryButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      const category = button.getAttribute("data-category");
+      itemCards.forEach(card => {
+        if (category === "all" || card.getAttribute("data-category") === category) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+      if (category === "all") {
+        featuredItems.scrollTo({ left: 0, behavior: "smooth" });
+      }
+    });
+  });
+
+  // Limit to 5 items visible in All Items (scroll horizontally for more)
+  featuredItems.style.overflowX = "auto";
+  featuredItems.style.scrollBehavior = "smooth";
+  featuredItems.style.whiteSpace = "nowrap";
+  itemCards.forEach(card => { card.style.flex = "0 0 auto"; });
+
+  // 🗂️ Item Database
+  const items = {
+    1: {
+      name: "Calculus Textbook",
+      specs: "Thomas' Calculus, 15th Edition, Pearson Publication, Hardcover, 1200 pages, includes access code for online resources",
+      condition: "Like new – No markings, no folded pages, stored in a smoke-free environment",
+      model: "ISBN-13: 978-0134438986",
+      year: "2023",
+      seller: "John Doe",
+      contact: "john.doe@studentmail.edu",
+      phone: "+91 9876543210",
+      location: "Block A, Hostel 3, ABC Engineering College",
+      price: "₹1,500",
+      description: "Perfect for engineering students. Covers single-variable and multivariable calculus with plenty of solved examples and practice problems. Bought for one semester, barely used.",
+      images: [
+        "c:\Users\SEC\Pictures\Screenshots\Screenshot 2025-08-13 133522.png",
+        "calculus_back.jpg",
+        "calculus_inside1.jpg",
+        "calculus_inside2.jpg"
+      ]
+    },
+    2: {
+      name: "Bluetooth Headphones",
+      specs: "Bose QuietComfort 45, Bluetooth 5.1, Noise-Cancelling, 30-hour battery life, USB-C fast charging, lightweight design",
+      condition: "Barely used – Purchased in March 2023, used less than 10 times, no scratches or damage",
+      model: "Bose QC45",
+      year: "2022",
+      seller: "Jane Smith",
+      contact: "jane.smith@studentmail.edu",
+      phone: "+91 9123456780",
+      location: "Room 204, Girls Hostel, ABC Engineering College",
+      price: "₹18,000",
+      description: "Premium noise-cancelling headphones with crystal-clear audio and deep bass. Ideal for online classes, music lovers, and gaming. Comes with original box, charging cable, and carrying case.",
+      images: [
+        "bose_qc45_front.jpg",
+        "bose_qc45_side.jpg",
+        "bose_qc45_case.jpg",
+        "bose_qc45_accessories.jpg"
+      ]
+    },
+    3: {
+      name: "Iron Box",
+      specs: "Lightweight, quick heating, non-stick soleplate, adjustable temperature control, overheat protection",
+      condition: "Almost new – purchased 3 months ago, used only a few times",
+      model: "Philips GC181/80",
+      year: "2024",
+      seller: "Amit Sharma",
+      contact: "amit.sharma@studentmail.edu",
+      phone: "+91 9876123456",
+      location: "Block B, Room 102, Boys Hostel, XYZ University",
+      price: "₹900",
+      description: "Compact and energy-efficient dry iron, perfect for hostel use. Heats up quickly and provides smooth ironing without sticking to clothes.",
+      images: [
+        "IBLHI9108_1.jpg",
+        "ironbox_side.jpg",
+        "ironbox_bottom.jpg"
+      ]
+    },
+    4: {
+      name: "HP Laptop",
+      specs: "Intel Core i5 (11th Gen), 8GB DDR4 RAM, 512GB SSD, 15.6-inch FHD display, Windows 11 Home, Backlit keyboard",
+      condition: "Perfect condition – no scratches, battery backup up to 7 hours",
+      model: "HP 15s-fq2717TU",
+      year: "2023",
+      seller: "Rohit Verma",
+      contact: "rohit.verma@studentmail.edu",
+      phone: "+91 9123456789",
+      location: "Room 210, Boys Hostel, XYZ University",
+      price: "₹45,000",
+      description: "A reliable laptop for both academic and personal use. Boots quickly, runs smoothly, and comes with genuine Windows and MS Office.",
+      images: [
+        "hp_laptop_front.jpg",
+        "hp_laptop_keyboard.jpg",
+        "hp_laptop_side.jpg"
+      ]
+    },
+    5: {
+      name: "MI Power Bank",
+      specs: "20000mAh capacity, 18W fast charging, dual USB output, USB-C input/output, LED battery indicator",
+      condition: "Like new – used twice, no scratches",
+      model: "Mi Power Bank 3i",
+      year: "2024",
+      seller: "Sneha Kapoor",
+      contact: "sneha.kapoor@studentmail.edu",
+      phone: "+91 9876012345",
+      location: "Room 304, Girls Hostel, XYZ University",
+      price: "₹1,500",
+      description: "Keep your devices charged on the go. Supports multiple devices and can charge a phone up to 5 times on a single charge.",
+      images: [
+        "mi_powerbank_front.jpg",
+        "mi_powerbank_ports.jpg",
+        "mi_powerbank_box.jpg"
+      ]
+    },
+    6: {
+      name: "Calculator",
+      specs: "Casio FX-991EX Scientific Calculator, 552 functions, natural textbook display, solar + battery power",
+      condition: "Perfect condition – no scratches, works flawlessly",
+      model: "Casio FX-991EX",
+      year: "2023",
+      seller: "Karan Mehta",
+      contact: "karan.mehta@studentmail.edu",
+      phone: "+91 9876234501",
+      location: "Block C, Room 105, Boys Hostel, XYZ University",
+      price: "₹900",
+      description: "Ideal for engineering and science students. Handles complex calculations including integration, matrices, and statistical analysis.",
+      images: [
+        "casio_calc_front.jpg",
+        "casio_calc_keys.jpg",
+        "casio_calc_box.jpg"
+      ]
+    }
+  };
+
+  let currentImageIndex = 0;
+  let currentImages = [];
+
+  // Open Modal
+  function openModal(id) {
+    const item = items[id];
+    if (item) {
+      document.getElementById("modalItemName").textContent = item.name;
+      document.getElementById("modalItemSpecs").textContent = item.specs;
+      document.getElementById("modalItemCondition").textContent = item.condition;
+      document.getElementById("modalItemModel").textContent = `${item.model} (${item.year})`;
+      document.getElementById("modalItemDescription").textContent = item.description;
+      document.getElementById("modalItemSeller").textContent = item.seller;
+      document.getElementById("modalItemContact").textContent = item.contact;
+      document.getElementById("modalItemLocation").textContent = item.location;
+
+
+      // Setup Carousel
+      const carousel = document.getElementById("carouselImages");
+      carousel.innerHTML = "";
+      currentImages = item.images;
+      currentImages.forEach(src => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.className = "w-full h-64 object-cover flex-shrink-0";
+        carousel.appendChild(img);
+      });
+      currentImageIndex = 0;
+      updateCarousel();
+
+      document.getElementById("itemModal").classList.remove("hidden");
+      document.getElementById("itemModal").classList.add("flex");
+    }
+  }
+
+  // Close Modal
+  function closeModal() {
+    document.getElementById("itemModal").classList.add("hidden");
+    document.getElementById("itemModal").classList.remove("flex");
+  }
+
+  // Carousel Navigation
+  document.getElementById("prevImage").addEventListener("click", () => {
+    currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+    updateCarousel();
+  });
+  document.getElementById("nextImage").addEventListener("click", () => {
+    currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+    updateCarousel();
+  });
+
+  function updateCarousel() {
+    const carousel = document.getElementById("carouselImages");
+    carousel.style.transform = `translateX(-${currentImageIndex * 100}%)`;
+  }
+
+  
+  // Toggle search bar when Start Swapping is clicked
+  document.getElementById("startSwappingBtn").addEventListener("click", function() {
+    const searchContainer = document.getElementById("searchContainer");
+    
+    if (searchContainer.style.display === "none" || searchContainer.style.display === "") {
+      searchContainer.style.display = "flex"; // Show
+    } else {
+      searchContainer.style.display = "none"; // Hide
+    }
+  });
+  // Function to filter items
+  function searchItems() {
+    let query = document.getElementById("searchBar").value.toLowerCase().trim();
+    let items = document.querySelectorAll(".item-card"); // Replace with your actual item class
+
+    items.forEach(function(item) {
+      let name = item.getAttribute("data-name").toLowerCase();
+      if (name.includes(query)) {
+        item.style.display = "block";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  }
+
+  // Search when clicking the button
+  document.getElementById("searchBtn").addEventListener("click", searchItems);
+
+  // Search when pressing Enter
+  document.getElementById("searchBar").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      searchItems();
+    }
+  });
+
+  // Get elements
+  const postBtn = document.getElementById("postBtn"); // your "+" button
+  const postForm = document.getElementById("postForm");
+  const closePostForm = document.getElementById("closePostForm");
+  const submitPost = document.getElementById("submitPost");
+
+  // Open post form
+  postBtn.addEventListener("click", () => {
+    postForm.classList.remove("hidden");
+  });
+
+  // Close post form
+  closePostForm.addEventListener("click", () => {
+    postForm.classList.add("hidden");
+  });
+
+  // Submit post
+    submitPost.addEventListener("click", () => {
+    const name = document.getElementById("itemName").value;
+    const specs = document.getElementById("itemSpecs").value;
+    const condition = document.getElementById("itemCondition").value;
+    const model = document.getElementById("itemModel").value;
+    const year = document.getElementById("itemYear").value;
+    const description= document.getElementById("itemDescription").value;
+    const seller = document.getElementById("itemSeller").value;
+    const contact = document.getElementById("itemContact").value;
+    const location = document.getElementById("itemLocation").value;
+    const image = document.getElementById("itemImage").value || "placeholder.jpg";
+
+    const featuredContainer = document.getElementById("featured-items");
+    const newCard = document.createElement("div");
+    newCard.classList.add("item-card", "bg-white", "shadow-md", "rounded-lg", "p-4");
+    newCard.setAttribute("data-name", name.toLowerCase());
+
+    newCard.innerHTML = `
+      <img src="${image}" class="w-full h-40 object-cover rounded-md mb-2">
+      <h3 class="text-lg font-bold">${name}</h3>
+      <p><strong>Specs:</strong> ${specs}</p>
+      <p><strong>Condition:</strong> ${condition}</p>
+      <p><strong>Model:</strong> ${model}</p>
+      <p><strong>Year:</strong> ${year}</p>
+      <p><strong>Seller:</strong> ${seller}</p>
+      <p><strong>Contact:</strong> ${contact}</p>
+      <div class="flex justify-between mt-3">
+        <button class="view-btn bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+          data-name="${name}"
+          data-specs="${specs}"
+          data-condition="${condition}"
+          data-model="${model} ${year}"
+          data-description="No description provided"
+          data-seller="${seller}"
+          data-contact="${contact}"
+          data-location="Not provided"
+          data-images="${image}">
+          View
+        </button>
+        <button class="message-btn bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+          data-contact="${contact}">
+          Message
+        </button>
+      </div>
+    `;
+
+    featuredContainer.appendChild(newCard);
+
+    // ✅ Attach event listeners
+    newCard.querySelector(".view-btn").addEventListener("click", (e) => {
+      const btn = e.target;
+      document.getElementById("modalItemName").textContent = btn.dataset.name;
+      document.getElementById("modalItemSpecs").textContent = btn.dataset.specs;
+      document.getElementById("modalItemCondition").textContent = btn.dataset.condition;
+      document.getElementById("modalItemModel").textContent = btn.dataset.model;
+      document.getElementById("modalItemDescription").textContent = btn.dataset.description;
+      document.getElementById("modalItemSeller").textContent = btn.dataset.seller;
+      document.getElementById("modalItemContact").textContent = btn.dataset.contact;
+      document.getElementById("modalItemLocation").textContent = btn.dataset.location;
+
+      const images = btn.dataset.images.split(",");
+      const carouselImages = document.getElementById("carouselImages");
+      carouselImages.innerHTML = images.map(img => `
+        <img src="${img}" class="w-full h-64 object-cover flex-shrink-0">
+      `).join("");
+      carouselImages.style.transform = "translateX(0)";
+
+      document.getElementById("itemModal").classList.remove("hidden");
+    });
+
+    newCard.querySelector(".message-btn").addEventListener("click", (e) => {
+      const contact = e.target.dataset.contact;
+      alert(`Contact seller at: ${contact}`);
+    });
+
+    // Reset form
+    postForm.classList.add("hidden");
+    document.querySelectorAll("#postForm input").forEach(input => input.value = "");
+  });
+</script>
+</body>
+</html>
