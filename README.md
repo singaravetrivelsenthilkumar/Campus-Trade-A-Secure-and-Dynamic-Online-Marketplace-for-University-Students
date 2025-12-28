@@ -33,7 +33,16 @@ Campus Trade is a secure and user-friendly online marketplace designed exclusive
 ![home ot](https://github.com/user-attachments/assets/07ea5154-99cb-45ab-bf7a-d5842d64b9be)
 
 #### Output3 - Item Posting
-![post ot](https://github.com/user-attachments/assets/b1743a3c-abb2-411e-86a5-6f6186a06793)
+<img width="1894" height="865" alt="image" src="https://github.com/user-attachments/assets/c3f1e09a-f824-4a29-953f-8a4d55e76802" />
+
+
+#### Output4 - Posted Items
+<img width="1919" height="868" alt="image" src="https://github.com/user-attachments/assets/0e6ac5a9-eb3b-48e3-ade5-41bd41a9eecf" />
+
+#### Output5 - Messaging System
+<img width="1895" height="868" alt="image" src="https://github.com/user-attachments/assets/d5d2d570-32cf-41a3-8636-1ebdb3855750" />
+
+
 
 System Output Summary:
 The system successfully enables students to log in, post items, browse listings, view item details, and message sellers through a seamless and user-friendly interface.
@@ -50,7 +59,3 @@ This project enhances student accessibility to affordable resources, promotes su
 1. Bingjie, H., Mengyao, R., Zhuo, X., Danni, L., & Wenjing, L. (2023). Investigating the market dynamics of campus second-hand trading platforms in the context of the current green economy. Research Publish Journals.
 2. Yuan, J., Zhang, Y., & Wang, Y. (2024). Research on design and implementation of campus second-hand trading platform based on WeChat mini program. Clausius Press.
 3. Ismail, M. F., Aziz, M. A., & Nor, F. N. S. M. (2020). Student online marketplace for university community. ResearchGate.
-
-
-
-
